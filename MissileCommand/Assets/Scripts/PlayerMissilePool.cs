@@ -1,4 +1,3 @@
-﻿public class PlayerMissilePool : GenericObjectPool<PlayerMissilePool>
+﻿public class PlayerMissilePool : GenericObjectPool<PlayerMissile>
 {
 }
-

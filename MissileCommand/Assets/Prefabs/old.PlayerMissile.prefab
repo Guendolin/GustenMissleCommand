@@ -127,14 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab95b5c7e4018af4bba58d072c3ffa33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  origin: {x: 0, y: 0}
-  target: {x: 0, y: 0}
-  projetileLineRenderer: {fileID: 1177741350243870377}
-  targetMarker: {fileID: 1177741351669207270}
-  projectile: {fileID: 1177741349994610930}
-  explosion: {fileID: 2448568621035080090, guid: 77cd8e2fcfa1ed042a614f652df8f7ca,
-    type: 3}
 --- !u!120 &1177741350243870377
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -325,7 +317,7 @@ GameObject:
   - component: {fileID: 1177741351432309560}
   - component: {fileID: 1177741351432309567}
   m_Layer: 0
-  m_Name: PlayerMissile
+  m_Name: old.PlayerMissile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,6 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7434b3a75d24b48a915049a44452f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  missileSprite: {fileID: 0}
 --- !u!1 &1177741351669207270
 GameObject:
   m_ObjectHideFlags: 0

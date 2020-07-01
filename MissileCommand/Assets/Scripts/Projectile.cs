@@ -7,102 +7,98 @@ using UnityEngine.UIElements;
 public class Projectile : MonoBehaviour
 {
 
-    //TODO remove [SerializedField] from variables where not needed
-    //Check spelling and Coding standards
-    [SerializeField]
-    private float speed = 5f;
+    ////TODO remove [SerializedField] from variables where not needed
+    ////Check spelling and Coding standards
+    //[SerializeField]
+    //private float speed = 5f;
 
-    [SerializeField]
-    private Vector2 origin = Vector2.zero;
+    //[SerializeField]
+    //private Vector2 origin = Vector2.zero;
 
-    [SerializeField]
-    private Vector2 target = Vector2.zero;
+    //[SerializeField]
+    //private Vector2 target = Vector2.zero;
 
-    [SerializeField]
-    private LineRenderer projetileLineRenderer;
+    //[SerializeField]
+    //private LineRenderer projetileLineRenderer;
 
-    [SerializeField]
-    private GameObject targetMarker;
+    //[SerializeField]
+    //private GameObject targetMarker;
 
-    [SerializeField]
-    private GameObject projectile;
+    //[SerializeField]
+    //private GameObject projectile;
 
-    [SerializeField]
-    private GameObject explosion;
+    //[SerializeField]
+    //private GameObject explosion;
 
-    private bool isBeingFired = false;
+    //private bool isBeingFired = false;
 
-    private bool isExploding = false;
+    //private bool isExploding = false;
   
 
-    void Start()
-    {
-        origin = transform.position;
-    }
+    //void Start()
+    //{
+    //    origin = transform.position;
+    //}
 
 
-    void Update()
-    {
+    //void Update()
+    //{
         
-        OnMouseDown();
+    //    OnMouseDown();
 
-        Vector3 normalizedTarget = Vector3.Normalize(target - origin);
+    //    //Vector3 normalizedTarget = Vector3.Normalize(target - origin);
 
-        if (isBeingFired)
-        {
-            projectile.transform.Translate(normalizedTarget * speed * Time.deltaTime);
-            projetileLineRenderer.positionCount = 2;
-            projetileLineRenderer.SetPosition(0, origin);
-            projetileLineRenderer.SetPosition(1, projectile.transform.position);
+    //    if (isBeingFired)
+    //    {
+    //        projectile.transform.position =  Vector3.MoveTowards(projectile.transform.position, targetMarker.transform.position, speed * Time.deltaTime);
+    //        //projectile.transform.Translate(normalizedTarget * speed * Time.deltaTime);
+    //        projetileLineRenderer.positionCount = 2;
+    //        projetileLineRenderer.SetPosition(0, origin);
+    //        projetileLineRenderer.SetPosition(1, projectile.transform.position);
 
-            if (Vector3.Distance(projectile.transform.position, targetMarker.transform.position) < 0.1f)
-            {
-                projectile.SetActive(false);
+    //        if ((targetMarker.transform.position - projectile.transform.position).sqrMagnitude < 0.1f)
+    //        {
+    //            projectile.SetActive(false);
 
-                //TODO pool explosions
-                Instantiate(explosion, targetMarker.transform.position, Quaternion.identity);
+    //            //TODO pool explosions
+    //            Instantiate(explosion, targetMarker.transform.position, Quaternion.identity);
 
-                targetMarker.SetActive(false);
-                projetileLineRenderer.positionCount = 0;
-                isBeingFired = false;
+    //            targetMarker.SetActive(false);
+    //            projetileLineRenderer.positionCount = 0;
+    //            isBeingFired = false;
                 
-                //TODO Use the pool for projectiles
-                //Put projectile back in pool
-                
-            }
-        }
+    //            //TODO Use the pool for projectiles
+    //            //Put projectile back in pool
+    //        }
+    //    }
 
+    //    //TODO When pool and player scripts are up, just pass in the relevant variables
+    //    void FireProjectile()
+    //    {
+    //        isBeingFired = true;
+    //        targetMarker.SetActive(true);
+    //        targetMarker.transform.position = target;
 
+    //        projectile.SetActive(true);
+    //        projectile.transform.position = origin;
+    //    }
 
+    //    void OnMouseDown()
+    //    {
+    //        //TODO move to relevant script (player/base)
+    //        if (Input.GetMouseButtonDown(0))
+    //        {
+    //            //TODO ask Simon if this is a good/normal way to get this
+    //            //Get our mouse position
+    //            Vector3 mousePosition;
 
-        void FireProjectile()
-        {
-            isBeingFired = true;
-            targetMarker.SetActive(true);
-            targetMarker.transform.position = target;
+    //            //TODO cache camera instead of Camera.main cuz it's slow
+    //            mousePosition = Input.mousePosition;
+    //            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-            projectile.SetActive(true);
-            projectile.transform.position = origin;
-        }
-
-        void OnMouseDown()
-        {
-            //TODO move to relevant script (player/base)
-            if (Input.GetMouseButtonDown(0))
-            {
-                //TODO ask Simon if this is a good/normal way to get this
-                //Get our mouse position
-                Vector3 mousePosition;
-
-
-                //TODO cache camera instead of Camera.main cuz it's slow
-                mousePosition = Input.mousePosition;
-                mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-
-                target = mousePosition;
-                FireProjectile();
-            }
-        }
-    }
-
+    //            target = mousePosition;
+    //            FireProjectile();
+    //        }
+    //    }
+    //}
 }

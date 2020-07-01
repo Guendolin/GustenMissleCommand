@@ -18,8 +18,8 @@ public abstract class GenericObjectPool<T> : MonoBehaviour where T : Component
     public T Get()
     {
         if (objects.Count == 0)
-
             AddObjects(1);
+
         return objects.Dequeue();
     }
 
