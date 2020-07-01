@@ -21,7 +21,7 @@ public class PlayerManager : MonoBehaviour
 
     void Start()
     {
-        //playerMissile = GetComponent<PlayerMissile>();
+        //TODO remove get component and do the usual serialize stuff
         playerMissileLauncher = GetComponentInChildren<PlayerMissileLauncher>();
         camera = Camera.main;
     }
@@ -40,10 +40,6 @@ public class PlayerManager : MonoBehaviour
             mousePosition = camera.ScreenToWorldPoint(mousePosition);
 
             playerMissileLauncher.FireMissile(mousePosition, playerMissileLauncher.transform.position);
-
-            //var playerMissile = PlayerMissilePool.Instance.Get();
-
- 
         }
     }
 }

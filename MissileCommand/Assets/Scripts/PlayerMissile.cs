@@ -8,10 +8,8 @@ public class PlayerMissile : MonoBehaviour
     [SerializeField]
     private float speed = 5f;
 
-    [SerializeField]
     private Vector2 origin = Vector2.zero;
 
-    [SerializeField]
     private Vector2 target = Vector2.zero;
 
     [SerializeField]
@@ -26,28 +24,11 @@ public class PlayerMissile : MonoBehaviour
     [SerializeField]
     private GameObject projectile;
 
-    //Ask Simon what's standard for public variables that shouldn't be edited
-    //[NonSerialized] / [HideInInspector]
-
-    //[NonSerialized]
-    public bool isBeingFired = false;
-
-    
-
-    void Start()
-    {
-        origin = transform.position;
-
-        projetileLineRenderer = GetComponent<LineRenderer>();
-    }
+    private bool isBeingFired = false;
 
     void Update()
     {
-        //var playerMissile = PlayerMissilePool.Instance.Get();
-
-        Debug.Log(target + " " + origin);
-        Debug.DrawLine(target, origin, Color.magenta);
-
+        //TODO remove this.
         if (this.isBeingFired)
         {   
             this.projectile.transform.position = Vector3.MoveTowards(this.projectile.transform.position, this.targetMarker.transform.position, speed * Time.deltaTime);
@@ -71,7 +52,6 @@ public class PlayerMissile : MonoBehaviour
         }
     }
 
-
     public void FireMissileInternal(Vector2 target, Vector2 origin)
     {
         this.origin = origin;
@@ -83,15 +63,4 @@ public class PlayerMissile : MonoBehaviour
         this.projectile.SetActive(true);
         this.projectile.transform.position = origin;
     }
-
-    //TODO When pool and player scripts are up, just pass in the relevant variables
-    //public void FireProjectile(Vector2 target)
-    //{
-    //    isBeingFired = true;
-    //    targetMarker.SetActive(true);
-    //    targetMarker.transform.position = target;
-
-    //    projectile.SetActive(true);
-    //    projectile.transform.position = origin;
-    //}
 }

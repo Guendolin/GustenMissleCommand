@@ -7,7 +7,8 @@ public class PlayerMissileLauncher : MonoBehaviour
     [SerializeField]
     private GameObject missileSprite;
 
-    
+    //TODO set sprite and remove after explosion
+
 
     void Update()
     {

@@ -188,7 +188,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8407443679167269989}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.68759155, y: -0.27863106, z: -0.9355469}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3428840726202231993}
@@ -209,8 +209,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  origin: {x: 0, y: 0}
-  target: {x: 0, y: 0}
   projetileLineRenderer: {fileID: 2974775356235455080}
   explosion: {fileID: 2448568621035080090, guid: 77cd8e2fcfa1ed042a614f652df8f7ca,
     type: 3}
@@ -234,7 +232,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
