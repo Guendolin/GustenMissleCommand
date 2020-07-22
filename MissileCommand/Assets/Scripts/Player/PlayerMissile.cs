@@ -16,9 +16,6 @@ public class PlayerMissile : MonoBehaviour
     private LineRenderer projetileLineRenderer;
 
     [SerializeField]
-    private GameObject explosion;
-
-    [SerializeField]
     private GameObject targetMarker;
 
     [SerializeField]
@@ -28,24 +25,25 @@ public class PlayerMissile : MonoBehaviour
 
     void Update()
     {
-        //TODO remove this.
-        if (this.isBeingFired)
+        if (isBeingFired)
         {   
-            this.projectile.transform.position = Vector3.MoveTowards(this.projectile.transform.position, this.targetMarker.transform.position, speed * Time.deltaTime);
-            this.projetileLineRenderer.positionCount = 2;
-            this.projetileLineRenderer.SetPosition(0, this.origin);
-            this.projetileLineRenderer.SetPosition(1, this.projectile.transform.position);
+            projectile.transform.position = Vector3.MoveTowards(projectile.transform.position, targetMarker.transform.position, speed * Time.deltaTime);
+            projetileLineRenderer.positionCount = 2;
+            projetileLineRenderer.SetPosition(0, origin);
+            projetileLineRenderer.SetPosition(1, projectile.transform.position);
 
-            if ((this.targetMarker.transform.position - this.projectile.transform.position).sqrMagnitude < 0.1f)
+            if ((targetMarker.transform.position - projectile.transform.position).sqrMagnitude < 0.1f)
             {
-                this.projectile.SetActive(false);
+                projectile.SetActive(false);
 
-                //TODO pool explosions
-                Instantiate(explosion, this.targetMarker.transform.position, Quaternion.identity);
+                //Pooling explosions (break this out as in enemy)
+                var playerExplosion = PlayerExplosionPool.Instance.Get();
+                playerExplosion.transform.position = projectile.transform.position;
+                playerExplosion.gameObject.SetActive(true);
 
-                this.targetMarker.SetActive(false);
-                this.projetileLineRenderer.positionCount = 0;
-                this.isBeingFired = false;
+                targetMarker.SetActive(false);
+                projetileLineRenderer.positionCount = 0;
+                isBeingFired = false;
 
                 PlayerMissilePool.Instance.ReturnToPool(this);
             }
@@ -56,11 +54,11 @@ public class PlayerMissile : MonoBehaviour
     {
         this.origin = origin;
         this.target = target;
-        this.isBeingFired = true;
-        this.targetMarker.SetActive(true);
-        this.targetMarker.transform.position = target;
+        isBeingFired = true;
+        targetMarker.SetActive(true);
+        targetMarker.transform.position = target;
         
-        this.projectile.SetActive(true);
-        this.projectile.transform.position = origin;
+        projectile.SetActive(true);
+        projectile.transform.position = origin;
     }
 }

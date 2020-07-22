@@ -15,9 +15,6 @@ public class EnemyMissile : MonoBehaviour
     private LineRenderer projetileLineRenderer;
 
     [SerializeField]
-    private GameObject explosion;
-
-    [SerializeField]
     private GameObject targetMarker;
 
     [SerializeField]
@@ -57,8 +54,9 @@ public class EnemyMissile : MonoBehaviour
     {
         this.projectile.SetActive(false);
 
-        //TODO pool explosions
-        Instantiate(explosion, this.targetMarker.transform.position, Quaternion.identity);
+        var enemyExplosion = EnemyExplosionPool.Instance.Get();
+        enemyExplosion.transform.position = projectile.transform.position;
+        enemyExplosion.gameObject.SetActive(true);
 
         this.targetMarker.SetActive(false);
         this.projetileLineRenderer.positionCount = 0;

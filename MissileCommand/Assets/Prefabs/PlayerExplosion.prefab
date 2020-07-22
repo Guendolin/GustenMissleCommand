@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2448568621035080093}
   - component: {fileID: 2448568621035080092}
   - component: {fileID: 2448568621035080091}
-  - component: {fileID: 2448568621035080095}
+  - component: {fileID: 6903177718458267482}
   m_Layer: 0
-  m_Name: Explosion
+  m_Name: PlayerExplosion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -102,7 +102,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2448568621035080095
+--- !u!114 &6903177718458267482
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,6 +111,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2448568621035080090}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d79e2eb23785dfc4e82a5df2e0df3322, type: 3}
+  m_Script: {fileID: 11500000, guid: a000d70057f23c545a9260d263c6ac0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExplosionRadius: 0
+  minExpolsionRadius: 0.05
+  maxExpolsionRadius: 0.3
+  playerExplosionPool: {fileID: 0}
