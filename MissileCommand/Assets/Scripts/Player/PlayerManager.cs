@@ -6,7 +6,9 @@ public class PlayerManager : MonoBehaviour
 {
     //PlayerMissile playerMissile;
     public PlayerMissileLauncher playerMissileLauncher;
-    Camera camera;
+
+    [SerializeField]
+    private Camera camera;
 
     //Set amount of bases
     //Set amount of missile launchers
@@ -14,16 +16,11 @@ public class PlayerManager : MonoBehaviour
     //Score keeping?
 
 
-    void Awake()
-    {
-
-    }
-
     void Start()
     {
-        //TODO remove get component and do the usual serialize stuff
-        playerMissileLauncher = GetComponentInChildren<PlayerMissileLauncher>();
-        camera = Camera.main;
+        ////TODO remove get component and do the usual serialize stuff
+        //playerMissileLauncher = GetComponentInChildren<PlayerMissileLauncher>();
+        //camera = Camera.main;
     }
     void Update()
     {

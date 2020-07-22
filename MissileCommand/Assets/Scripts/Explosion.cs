@@ -4,73 +4,48 @@ using UnityEngine;
 
 public class Explosion : MonoBehaviour
 {
-    public CircleCollider2D ExplosionCollider;
-
-    private Vector3 explosionScale;
-    private Vector3 colliderScale;
-
-    public float lerper;
-
-    public Vector3 tempScale;
+    //TODO check distance instead of using collider, try with enemy missiles checking for explosions
 
     //TODO if not used remove delay
     private float delay = 0f;
 
-    public Projectile projectileRef;
+    public float ExplosionRadius = 0f;
 
-    public GameObject clone = null;
+    [SerializeField]
+    private float minExpolsionRadius = 0.05f;
+
+    [SerializeField]
+    private float maxExpolsionRadius = 0.3f;
 
     void Start()
     {
-        
-        ExplosionCollider = GetComponent<CircleCollider2D>();
-        ExplosionCollider.radius = 0.05f;
-
-        //clone = projectileRef.explosionClone;
-
-        //Vector3 tempScale = clone.transform.localScale;
     }
 
     void Update()
     {
-        //TODO Rework this, the radius growth is inconsistent 
+        //This feels a bit janky, rework to something simpler/non lerp
+        //Debug.Log(ExplosionRadius);
 
-        #region oldCode
-        //-----------------------------------------------------------------------------------------
-        //lerper = Mathf.Lerp(0.5f, 1.5f, 100);
-
-        //Vector3 scaleChange;
-        //scaleChange = new Vector3(-0.01f, -0.01f, -0.01f);
-
-        //transform.localScale += scaleChange;
-
-        //if (transform.localScale.x < 0.1f|| transform.localScale.x > 1.0f)
-        //{
-        //    scaleChange = -scaleChange;
-        //}
-        //-----------------------------------------------------------------------------------------
-        ////Get the scale
-        //explosionScale = gameObject.transform.localScale;
-        ////multiply the collider radius with the scale
-        //colliderScale = ExplosionCollider.radius * explosionScale;
-        ////Set radius to the new value
-        //ExplosionCollider.radius = colliderScale.x;
-
-        //transform.localScale += explosionScale * 0.5f;
-        //-----------------------------------------------------------------------------------------
-        #endregion
-
-        
-        //tempScale.x += Time.time;
-        //clone.transform.localScale = tempScale;
-
+        if (ExplosionRadius <= maxExpolsionRadius)
+        {
+            //Time is weird
+            ExplosionRadius = Mathf.Lerp(minExpolsionRadius, maxExpolsionRadius, Time.deltaTime / 10f);
+        }
         DestroyExplosion();
+
+        //This only works if there's one explosion at a time
+        if (!gameObject.activeInHierarchy)
+        {
+            ExplosionRadius = 0f;
+        }
+        
     }
 
     void DestroyExplosion()
     {
-        gameObject.transform.localScale = Vector3.one;
-        ExplosionCollider.radius = 0.05f;
+
+        //TODO When pool in place Return to pool instead
+        //This destroys the explosion when animation is complete(with a delay if wanted)
         Destroy(gameObject, this.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).length + delay);
     }
 }
