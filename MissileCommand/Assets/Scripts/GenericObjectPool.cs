@@ -35,4 +35,8 @@ public abstract class GenericObjectPool<T> : MonoBehaviour where T : Component
         newObject.gameObject.SetActive(false);
         objects.Enqueue(newObject);
     }
+    public int ObjectCountInPool()
+    {
+        return objects.Count;
+    }
 }

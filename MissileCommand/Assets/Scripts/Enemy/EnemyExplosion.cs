@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyExplosion : MonoBehaviour
 {
+    //Make this expand as well to chain
+
     [SerializeField]
     private float explosionTime = 1f;
 

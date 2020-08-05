@@ -13,7 +13,7 @@ public class PlayerExplosion : MonoBehaviour
     private float minExpolsionRadius = 0.05f;
 
     [SerializeField]
-    private float maxExpolsionRadius = 0.3f;
+    private float maxExpolsionRadius = 1.0f/*0.3f*/;
 
     [SerializeField]
     private float explosionTime = 1f;
@@ -24,10 +24,10 @@ public class PlayerExplosion : MonoBehaviour
     {
         //WIP - this feels janky
 
-        ExplosionRadius = Mathf.Lerp(minExpolsionRadius, maxExpolsionRadius, timer * 3f);
+        ExplosionRadius = Mathf.Lerp(minExpolsionRadius, maxExpolsionRadius, timer);
 
-        timer += Time.deltaTime;
-        if (timer >= explosionTime)
+        timer += Time.deltaTime / explosionTime;
+        if (timer >= 1f)
         {
             timer = 0f;
             ExplosionRadius = 0f;

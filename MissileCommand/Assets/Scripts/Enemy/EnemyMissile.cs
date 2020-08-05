@@ -24,64 +24,71 @@ public class EnemyMissile : MonoBehaviour
 
     void Update()
     {
-        //TODO remove this.
-        if (this.isBeingFired)
+        if (isBeingFired)
         {
-            this.projectile.transform.position = Vector3.MoveTowards(this.projectile.transform.position, this.targetMarker.transform.position, speed * Time.deltaTime);
-            this.projetileLineRenderer.positionCount = 2;
-            this.projetileLineRenderer.SetPosition(0, this.origin);
-            this.projetileLineRenderer.SetPosition(1, this.projectile.transform.position);
+            projectile.transform.position = Vector3.MoveTowards(projectile.transform.position, targetMarker.transform.position, speed * Time.deltaTime);
+            projetileLineRenderer.positionCount = 2;
+            projetileLineRenderer.SetPosition(0, origin);
+            projetileLineRenderer.SetPosition(1, projectile.transform.position);
 
-            if ((this.targetMarker.transform.position - this.projectile.transform.position).sqrMagnitude < 0.1f)
+            if ((targetMarker.transform.position - projectile.transform.position).sqrMagnitude < 0.1f)
             {
                 ExplodeAndReturnToPool();
             }
+
+            ////Collision check
+            //    var playerExplosion = PlayerExplosionPool.Instance.Get();
+
+            //    //IList<PlayerExplosion> GetPlayerExplosions() => new List<PlayerExplosion> ();
+            //    //Debug.Log(GetPlayerExplosions().Count);
+
+
+            //    IList<PlayerExplosion> playerExplosions = GetPlayerExplosions();
+
+            //    for (int i = 0; i < playerExplosions.Count; i++)
+            //    {
+            //        PlayerExplosion explosion = playerExplosions[i];
+            //        if ((transform.position - explosion.transform.position).sqrMagnitude < (explosion.ExplosionRadius * explosion.ExplosionRadius))
+            //        {
+            //            ExplodeAndReturnToPool();
+            //        }
+            //    }
+            //}
+
         }
     }
     public void FireMissileInternal(Vector2 target, Vector2 origin)
     {
         this.origin = origin;
         this.target = target;
-        this.isBeingFired = true;
-        this.targetMarker.SetActive(true);
-        this.targetMarker.transform.position = target;
+        isBeingFired = true;
+        targetMarker.SetActive(true);
+        targetMarker.transform.position = target;
 
-        this.projectile.SetActive(true);
-        this.projectile.transform.position = origin;
+        projectile.SetActive(true);
+        projectile.transform.position = origin;
     }
 
     private void ExplodeAndReturnToPool()
     {
-        this.projectile.SetActive(false);
+        projectile.SetActive(false);
 
         var enemyExplosion = EnemyExplosionPool.Instance.Get();
         enemyExplosion.transform.position = projectile.transform.position;
         enemyExplosion.gameObject.SetActive(true);
 
-        this.targetMarker.SetActive(false);
-        this.projetileLineRenderer.positionCount = 0;
-        this.isBeingFired = false;
+        targetMarker.SetActive(false);
+        projetileLineRenderer.positionCount = 0;
+        isBeingFired = false;
 
         EnemyMissilePool.Instance.ReturnToPool(this);
     }
 
-    //WIP
-    private bool CollisionCheck() 
-    {
-        Vector3 ownPosition;
-
-        Vector3 otherPosition;
-
-        // Check if own transform is a certain distance from other pos, then explode and return to pool
-        // Needs to detect growing explosion and only explosions
-        //
-
-        if (true)
-        {
-            return true;
-        }
-
-
-        return false;
-    }
+    //private void GetPlayerExplosions(IList listToPopulate)
+    //{
+    //    foreach (var PlayerExplosionPool.Instance.Get() in PlayerExplosionPool)
+    //    {
+    //        listToPopulate.Add(PlayerExplosionPool.Instance.Get());
+    //    }
+    //}
 }

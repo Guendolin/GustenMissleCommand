@@ -48,7 +48,7 @@ public class EnemyManager : MonoBehaviour
         {
             
             fireTimer = 0;
-            enemyMissileLauncher.FireMissile(Vector2.zero, enemyMissileLauncher.transform.position);
+            enemyMissileLauncher.FireMissile(new Vector2(0.0f,-10.0f), enemyMissileLauncher.transform.position);
             SetMissileLauncherPosition();
         }
     }
@@ -58,4 +58,21 @@ public class EnemyManager : MonoBehaviour
 
         fireTime = Mathf.Clamp(Random.Range((fireTime * 0.5f), fireTime * 1.5f), 1f, 3f);
     }
+
+    //IList<PlayerExplosion> GetPlayerExplosions() => new List<PlayerExplosion>();
+    //public bool CheckCollision()
+    //{
+    //    IList<PlayerExplosion> playerExplosions = GetPlayerExplosions();
+
+    //    for (int i = 0; i < playerExplosions.Count; i++)
+    //    {
+    //        PlayerExplosion explosion = playerExplosions[i];
+
+    //        if ((transform.position - explosion.transform.position).sqrMagnitude < (explosion.ExplosionRadius * explosion.ExplosionRadius))
+    //        {
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
 }
