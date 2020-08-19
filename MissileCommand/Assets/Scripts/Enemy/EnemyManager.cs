@@ -6,16 +6,18 @@ public class EnemyManager : MonoBehaviour
 {
     public EnemyMissileLauncher enemyMissileLauncher;
 
-    [SerializeField][Tooltip("Set the Y-position of the EnemyMissileLaunchers")]
+    //private Vector2 missileTargetPosition;
+
+    public GameObject missileTarget;
+
+    [SerializeField]
+    [Tooltip("Set the Y-position of the EnemyMissileLaunchers")]
     private float enemyMissileSpawnY = 6f;
 
-    //Ask Simon
-    //Min max has to be const for Range to work, but that makes them uneditable in the inspector, because --const--
-    //I can do Custom Inspector with "EditorGUILayout.MinMaxSlider", but for this?
-    [SerializeField] 
+    [SerializeField]
     [Tooltip("Lowest possible time between shots")]
     private const float minFireTime = 1f;
-    
+
     [SerializeField]
     [Tooltip("Highest possible time between shots")]
     private const float maxFireTime = 3f;
@@ -46,12 +48,22 @@ public class EnemyManager : MonoBehaviour
         fireTimer += Time.deltaTime;
         if (fireTimer >= fireTime)
         {
-            
             fireTimer = 0;
-            enemyMissileLauncher.FireMissile(new Vector2(0.0f,-10.0f), enemyMissileLauncher.transform.position);
+            SetMissileTarget();
+            enemyMissileLauncher.FireMissile(missileTarget.transform.position, enemyMissileLauncher.transform.position);
             SetMissileLauncherPosition();
         }
     }
+
+    void SetMissileTarget()
+    {
+        int targetBase = Random.Range(0, 5);
+        //missileTargetPosition = GameManager.Instance.targetCities[targetBase].transform.position;
+        missileTarget = GameManager.Instance.targetCities[targetBase];
+        //Add functionality for the missiles to target player missile bases
+
+    }
+
     void SetMissileLauncherPosition()
     {
         enemyMissileLauncher.transform.position = new Vector3(Random.Range(-10.25f, 10.25f), enemyMissileSpawnY);
@@ -59,20 +71,20 @@ public class EnemyManager : MonoBehaviour
         fireTime = Mathf.Clamp(Random.Range((fireTime * 0.5f), fireTime * 1.5f), 1f, 3f);
     }
 
-    //IList<PlayerExplosion> GetPlayerExplosions() => new List<PlayerExplosion>();
-    //public bool CheckCollision()
-    //{
-    //    IList<PlayerExplosion> playerExplosions = GetPlayerExplosions();
+    IList<PlayerExplosion> GetPlayerExplosions() => new List<PlayerExplosion>();
+    public bool CheckCollision()
+    {
+        IList<PlayerExplosion> playerExplosions = GetPlayerExplosions();
 
-    //    for (int i = 0; i < playerExplosions.Count; i++)
-    //    {
-    //        PlayerExplosion explosion = playerExplosions[i];
+        for (int i = 0; i < playerExplosions.Count; i++)
+        {
+            PlayerExplosion explosion = playerExplosions[i];
 
-    //        if ((transform.position - explosion.transform.position).sqrMagnitude < (explosion.ExplosionRadius * explosion.ExplosionRadius))
-    //        {
-    //            return true;
-    //        }
-    //    }
-    //    return false;
-    //}
+            if ((transform.position - explosion.transform.position).sqrMagnitude < (explosion.ExplosionRadius * explosion.ExplosionRadius))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

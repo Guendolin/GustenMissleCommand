@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlayerExplosion : MonoBehaviour
 {
-    //TODO check distance instead of using collider,
-    //try with enemy missiles checking for explosions
-
     public float ExplosionRadius = 0f;
 
     [SerializeField]
@@ -20,10 +17,13 @@ public class PlayerExplosion : MonoBehaviour
 
     private float timer;
 
+    private void OnEnable()
+    {
+        ExplosionManager.Instance.CheckCollision(this);
+    }
+
     void Update()
     {
-        //WIP - this feels janky
-
         ExplosionRadius = Mathf.Lerp(minExpolsionRadius, maxExpolsionRadius, timer);
 
         timer += Time.deltaTime / explosionTime;

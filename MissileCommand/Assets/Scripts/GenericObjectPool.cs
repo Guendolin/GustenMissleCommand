@@ -9,6 +9,8 @@ public abstract class GenericObjectPool<T> : MonoBehaviour where T : Component
 
     public static GenericObjectPool<T> Instance { get; private set; }
     private Queue<T> objects = new Queue<T>();
+    public List<T> ObjectList;
+
 
     private void Awake()
     {
@@ -20,11 +22,16 @@ public abstract class GenericObjectPool<T> : MonoBehaviour where T : Component
         if (objects.Count == 0)
             AddObjects(1);
 
-        return objects.Dequeue();
+        var dequeueObject = objects.Dequeue();
+        
+        ObjectList.Add(dequeueObject);
+        return dequeueObject;
     }
 
     public void ReturnToPool(T objectsToReturn)
     {
+        ObjectList.Remove(objectsToReturn);
+        
         objectsToReturn.gameObject.SetActive(false);
         objects.Enqueue(objectsToReturn);
     }
@@ -34,9 +41,5 @@ public abstract class GenericObjectPool<T> : MonoBehaviour where T : Component
         var newObject = GameObject.Instantiate(prefab);
         newObject.gameObject.SetActive(false);
         objects.Enqueue(newObject);
-    }
-    public int ObjectCountInPool()
-    {
-        return objects.Count;
     }
 }

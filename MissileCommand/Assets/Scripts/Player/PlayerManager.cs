@@ -4,24 +4,22 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    //PlayerMissile playerMissile;
-    public PlayerMissileLauncher playerMissileLauncher;
 
     [SerializeField]
     private Camera camera;
 
-    //Set amount of bases
-    //Set amount of missile launchers
-    //Set pos and rot of missile launchers
+    public PlayerMissileLauncher[] playerMissileLauncher = new PlayerMissileLauncher[10];
+
+    private int currentLauncher;
+
     //Score keeping?
 
 
     void Start()
     {
-        ////TODO remove get component and do the usual serialize stuff
-        //playerMissileLauncher = GetComponentInChildren<PlayerMissileLauncher>();
-        //camera = Camera.main;
+        currentLauncher = playerMissileLauncher.Length - 1;
     }
+
     void Update()
     {
         OnMouseDown();
@@ -36,7 +34,12 @@ public class PlayerManager : MonoBehaviour
             mousePosition = Input.mousePosition;
             mousePosition = camera.ScreenToWorldPoint(mousePosition);
 
-            playerMissileLauncher.FireMissile(mousePosition, playerMissileLauncher.transform.position);
+            if (currentLauncher >= 0)
+            {
+                playerMissileLauncher[currentLauncher].FireMissile(mousePosition, playerMissileLauncher[currentLauncher].transform.position);
+                playerMissileLauncher[currentLauncher].gameObject.SetActive(false);
+                currentLauncher--;
+            }
         }
     }
 }

@@ -47,3 +47,6 @@ TagManager:
   - name: Enemy Line
     uniqueID: 104877569
     locked: 0
+  - name: PlayerMissileLauchers
+    uniqueID: 1274341821
+    locked: 0

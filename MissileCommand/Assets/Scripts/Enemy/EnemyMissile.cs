@@ -35,28 +35,9 @@ public class EnemyMissile : MonoBehaviour
             {
                 ExplodeAndReturnToPool();
             }
-
-            ////Collision check
-            //    var playerExplosion = PlayerExplosionPool.Instance.Get();
-
-            //    //IList<PlayerExplosion> GetPlayerExplosions() => new List<PlayerExplosion> ();
-            //    //Debug.Log(GetPlayerExplosions().Count);
-
-
-            //    IList<PlayerExplosion> playerExplosions = GetPlayerExplosions();
-
-            //    for (int i = 0; i < playerExplosions.Count; i++)
-            //    {
-            //        PlayerExplosion explosion = playerExplosions[i];
-            //        if ((transform.position - explosion.transform.position).sqrMagnitude < (explosion.ExplosionRadius * explosion.ExplosionRadius))
-            //        {
-            //            ExplodeAndReturnToPool();
-            //        }
-            //    }
-            //}
-
         }
     }
+
     public void FireMissileInternal(Vector2 target, Vector2 origin)
     {
         this.origin = origin;
@@ -69,7 +50,7 @@ public class EnemyMissile : MonoBehaviour
         projectile.transform.position = origin;
     }
 
-    private void ExplodeAndReturnToPool()
+    public void ExplodeAndReturnToPool()
     {
         projectile.SetActive(false);
 
@@ -83,12 +64,4 @@ public class EnemyMissile : MonoBehaviour
 
         EnemyMissilePool.Instance.ReturnToPool(this);
     }
-
-    //private void GetPlayerExplosions(IList listToPopulate)
-    //{
-    //    foreach (var PlayerExplosionPool.Instance.Get() in PlayerExplosionPool)
-    //    {
-    //        listToPopulate.Add(PlayerExplosionPool.Instance.Get());
-    //    }
-    //}
 }
