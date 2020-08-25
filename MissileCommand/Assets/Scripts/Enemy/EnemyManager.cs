@@ -6,8 +6,6 @@ public class EnemyManager : MonoBehaviour
 {
     public EnemyMissileLauncher enemyMissileLauncher;
 
-    //private Vector2 missileTargetPosition;
-
     public GameObject missileTarget;
 
     [SerializeField]
@@ -29,13 +27,7 @@ public class EnemyManager : MonoBehaviour
 
     private float fireTimer = 0f;
 
-    //Get bases + towns positions
-    //Get amount of enemy missiles dependent on level
-    //Set start location for enemy missiles & targets
-
-
     //some logic for if the missiles should be splitting
-
 
 
     void Start()
@@ -50,7 +42,7 @@ public class EnemyManager : MonoBehaviour
         {
             fireTimer = 0;
             SetMissileTarget();
-            enemyMissileLauncher.FireMissile(missileTarget.transform.position, enemyMissileLauncher.transform.position);
+            enemyMissileLauncher.FireMissile(missileTarget, enemyMissileLauncher.gameObject);
             SetMissileLauncherPosition();
         }
     }
@@ -58,33 +50,12 @@ public class EnemyManager : MonoBehaviour
     void SetMissileTarget()
     {
         int targetBase = Random.Range(0, 5);
-        //missileTargetPosition = GameManager.Instance.targetCities[targetBase].transform.position;
         missileTarget = GameManager.Instance.targetCities[targetBase];
-        //Add functionality for the missiles to target player missile bases
-
     }
 
     void SetMissileLauncherPosition()
     {
         enemyMissileLauncher.transform.position = new Vector3(Random.Range(-10.25f, 10.25f), enemyMissileSpawnY);
-
         fireTime = Mathf.Clamp(Random.Range((fireTime * 0.5f), fireTime * 1.5f), 1f, 3f);
-    }
-
-    IList<PlayerExplosion> GetPlayerExplosions() => new List<PlayerExplosion>();
-    public bool CheckCollision()
-    {
-        IList<PlayerExplosion> playerExplosions = GetPlayerExplosions();
-
-        for (int i = 0; i < playerExplosions.Count; i++)
-        {
-            PlayerExplosion explosion = playerExplosions[i];
-
-            if ((transform.position - explosion.transform.position).sqrMagnitude < (explosion.ExplosionRadius * explosion.ExplosionRadius))
-            {
-                return true;
-            }
-        }
-        return false;
     }
 }

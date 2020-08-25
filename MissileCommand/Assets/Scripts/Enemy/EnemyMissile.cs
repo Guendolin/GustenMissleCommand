@@ -7,18 +7,14 @@ public class EnemyMissile : MonoBehaviour
     [SerializeField]
     private float speed = 5f;
 
-    private Vector2 origin = Vector2.zero;
+    private GameObject origin;
 
-    private Vector2 target = Vector2.zero;
+    private GameObject target;
+
+    private Vector2 originPosition;
 
     [SerializeField]
     private LineRenderer projetileLineRenderer;
-
-    [SerializeField]
-    private GameObject targetMarker;
-
-    [SerializeField]
-    public GameObject projectile;
 
     private bool isBeingFired = false;
 
@@ -26,39 +22,36 @@ public class EnemyMissile : MonoBehaviour
     {
         if (isBeingFired)
         {
-            projectile.transform.position = Vector3.MoveTowards(projectile.transform.position, targetMarker.transform.position, speed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
             projetileLineRenderer.positionCount = 2;
-            projetileLineRenderer.SetPosition(0, origin);
-            projetileLineRenderer.SetPosition(1, projectile.transform.position);
+            projetileLineRenderer.SetPosition(0, originPosition);
+            projetileLineRenderer.SetPosition(1, transform.position);
 
-            if ((targetMarker.transform.position - projectile.transform.position).sqrMagnitude < 0.1f)
+            if ((target.transform.position - transform.position).sqrMagnitude < 0.1f)
             {
+                target.SetActive(false);
                 ExplodeAndReturnToPool();
             }
         }
     }
 
-    public void FireMissileInternal(Vector2 target, Vector2 origin)
+    public void FireMissileInternal(GameObject target, GameObject origin)
     {
         this.origin = origin;
         this.target = target;
         isBeingFired = true;
-        targetMarker.SetActive(true);
-        targetMarker.transform.position = target;
 
-        projectile.SetActive(true);
-        projectile.transform.position = origin;
+        originPosition = origin.transform.position;
+
+        transform.position = origin.transform.position;
     }
 
     public void ExplodeAndReturnToPool()
     {
-        projectile.SetActive(false);
-
         var enemyExplosion = EnemyExplosionPool.Instance.Get();
-        enemyExplosion.transform.position = projectile.transform.position;
+        enemyExplosion.transform.position = transform.position;
         enemyExplosion.gameObject.SetActive(true);
 
-        targetMarker.SetActive(false);
         projetileLineRenderer.positionCount = 0;
         isBeingFired = false;
 

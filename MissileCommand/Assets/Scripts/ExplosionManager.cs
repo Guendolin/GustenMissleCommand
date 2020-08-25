@@ -42,7 +42,7 @@ public class ExplosionManager : MonoBehaviour
         {
             EnemyMissile missile = enemyMissiles[i];
             
-            if (CheckCollision(explosion.gameObject, missile.projectile, 1.0f))
+            if (CheckCollision(explosion.gameObject, missile.gameObject, 1.0f))
             {
                 missile.ExplodeAndReturnToPool();
             }

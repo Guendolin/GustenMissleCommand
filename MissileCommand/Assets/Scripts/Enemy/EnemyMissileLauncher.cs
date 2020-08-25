@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyMissileLauncher : MonoBehaviour
 {
-    public void FireMissile(Vector2 target, Vector2 origin)
+    public void FireMissile(GameObject target, GameObject origin)
     {
         var enemyMissile = EnemyMissilePool.Instance.Get();
 

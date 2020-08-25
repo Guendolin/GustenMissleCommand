@@ -34,18 +34,7 @@ public class PlayerMissile : MonoBehaviour
 
             if ((targetMarker.transform.position - projectile.transform.position).sqrMagnitude < 0.1f)
             {
-                projectile.SetActive(false);
-
-                //Pooling explosions (break this out as in enemy)
-                var playerExplosion = PlayerExplosionPool.Instance.Get();
-                playerExplosion.transform.position = projectile.transform.position;
-                playerExplosion.gameObject.SetActive(true);
-
-                targetMarker.SetActive(false);
-                projetileLineRenderer.positionCount = 0;
-                isBeingFired = false;
-
-                PlayerMissilePool.Instance.ReturnToPool(this);
+                ExplodeAndReturnToPool();
             }
         }
     }
@@ -60,5 +49,20 @@ public class PlayerMissile : MonoBehaviour
         
         projectile.SetActive(true);
         projectile.transform.position = origin;
+    }
+
+    public void ExplodeAndReturnToPool()
+    {
+        projectile.SetActive(false);
+
+        var playerExplosion = PlayerExplosionPool.Instance.Get();
+        playerExplosion.transform.position = projectile.transform.position;
+        playerExplosion.gameObject.SetActive(true);
+
+        targetMarker.SetActive(false);
+        projetileLineRenderer.positionCount = 0;
+        isBeingFired = false;
+
+        PlayerMissilePool.Instance.ReturnToPool(this);
     }
 }
