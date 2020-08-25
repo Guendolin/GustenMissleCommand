@@ -21,54 +21,31 @@ public class ExplosionManager : MonoBehaviour
     }
 
 
-    //public bool CheckCollision(GameObject self, GameObject other, float bufferRange)
-    //{
-    //    if ((self.transform.position - other.transform.position).sqrMagnitude < bufferRange)
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}
+    public bool CheckCollision(GameObject self, GameObject other, float bufferRange)
+    {
 
-    public void CheckCollision(PlayerExplosion explosion)
+        if ((self.transform.position - other.transform.position).sqrMagnitude < bufferRange)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void CheckCollisionLoop(PlayerExplosion explosion)
     {
         enemyMissiles = EnemyMissilePool.Instance.ObjectList;
 
         for (int i = 0; i < enemyMissiles.Count; i++)
         {
             EnemyMissile missile = enemyMissiles[i];
-
-            if ((explosion.transform.position - missile.transform.position).sqrMagnitude < (3.0f/*explosion.ExplosionRadius * explosion.ExplosionRadius*/))
+            
+            if (CheckCollision(explosion.gameObject, missile.projectile, 1.0f))
             {
                 missile.ExplodeAndReturnToPool();
-                return;
             }
         }
     }
 }
-
-
-//bool CheckCollision()
-//{
-//    for (int i = 0; i < playerExplosions.Count; i++)
-//    {
-//        PlayerExplosion explosion = playerExplosions[i];
-
-//        for (int j = 0; j < enemyMissiles.Count; j++)
-//        {
-//            EnemyMissile missile = enemyMissiles[j];
-
-//            if ((missile.transform.position - explosion.transform.position).sqrMagnitude < (explosion.ExplosionRadius * explosion.ExplosionRadius))
-//            {
-//                missileToExplode = missile;
-//                return true;
-//            }
-//        }
-//    }
-//    return false;
-//}
-
-

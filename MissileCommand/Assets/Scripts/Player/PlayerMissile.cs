@@ -26,7 +26,7 @@ public class PlayerMissile : MonoBehaviour
     void Update()
     {
         if (isBeingFired)
-        {   
+        {
             projectile.transform.position = Vector3.MoveTowards(projectile.transform.position, targetMarker.transform.position, speed * Time.deltaTime);
             projetileLineRenderer.positionCount = 2;
             projetileLineRenderer.SetPosition(0, origin);

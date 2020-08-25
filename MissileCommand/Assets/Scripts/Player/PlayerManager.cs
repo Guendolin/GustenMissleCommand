@@ -27,6 +27,8 @@ public class PlayerManager : MonoBehaviour
 
     void OnMouseDown()
     {
+
+
         if (Input.GetMouseButtonDown(0))
         {
             Vector3 mousePosition;
@@ -36,10 +38,17 @@ public class PlayerManager : MonoBehaviour
 
             if (currentLauncher >= 0)
             {
-                playerMissileLauncher[currentLauncher].FireMissile(mousePosition, playerMissileLauncher[currentLauncher].transform.position);
+                FireMissile(mousePosition, playerMissileLauncher[currentLauncher].transform.position);
                 playerMissileLauncher[currentLauncher].gameObject.SetActive(false);
                 currentLauncher--;
             }
         }
+    }
+    public void FireMissile(Vector2 target, Vector2 origin)
+    {
+        var playerMissile = PlayerMissilePool.Instance.Get();
+
+        playerMissile.FireMissileInternal(target, origin);
+        playerMissile.gameObject.SetActive(true);
     }
 }

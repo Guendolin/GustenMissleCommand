@@ -18,7 +18,7 @@ public class EnemyMissile : MonoBehaviour
     private GameObject targetMarker;
 
     [SerializeField]
-    private GameObject projectile;
+    public GameObject projectile;
 
     private bool isBeingFired = false;
 
