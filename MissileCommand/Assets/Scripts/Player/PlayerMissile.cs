@@ -23,6 +23,8 @@ public class PlayerMissile : MonoBehaviour
 
     private bool isBeingFired = false;
 
+    public Vector3 ProjectilePosition => projectile.transform.position;
+
     void Update()
     {
         if (isBeingFired)

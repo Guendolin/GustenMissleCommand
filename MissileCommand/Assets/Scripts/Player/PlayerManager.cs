@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngineInternal;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -8,16 +9,13 @@ public class PlayerManager : MonoBehaviour
     [SerializeField]
     private Camera camera;
 
-    public PlayerMissileLauncher[] playerMissileLauncher = new PlayerMissileLauncher[10];
-
-    private int currentLauncher;
+    public PlayerBase[] playerBases;
 
     //Score keeping?
 
-
     void Start()
     {
-        currentLauncher = playerMissileLauncher.Length - 1;
+
     }
 
     void Update()
@@ -27,20 +25,32 @@ public class PlayerManager : MonoBehaviour
 
     void OnMouseDown()
     {
-
-
         if (Input.GetMouseButtonDown(0))
         {
-            Vector3 mousePosition;
+            Vector3 mousePositionScreen = Input.mousePosition;
+            Vector3 mousePositionWorld = camera.ScreenToWorldPoint(mousePositionScreen);
 
-            mousePosition = Input.mousePosition;
-            mousePosition = camera.ScreenToWorldPoint(mousePosition);
+            int currentBase = -1;
 
-            if (currentLauncher >= 0)
+            float closetDistance = float.MaxValue;
+
+            for (int i = 0; i < playerBases.Length; i++)
             {
-                FireMissile(mousePosition, playerMissileLauncher[currentLauncher].transform.position);
-                playerMissileLauncher[currentLauncher].gameObject.SetActive(false);
-                currentLauncher--;
+                //break this out as a global variable
+                PlayerBase pBase = playerBases[i];
+                float distanceToPosition = Mathf.Abs(pBase.transform.position.x - mousePositionWorld.x);
+
+                if (pBase.HasMissiles() && distanceToPosition < closetDistance)
+                {
+                    currentBase = i;
+                    closetDistance = distanceToPosition;
+                }
+            }
+            if (currentBase >=0 && playerBases[currentBase].HasMissiles())
+            {
+                FireMissile(mousePositionWorld, playerBases[currentBase].playerMissileLauncher[playerBases[currentBase].currentLauncher].transform.position);
+                playerBases[currentBase].playerMissileLauncher[playerBases[currentBase].currentLauncher].gameObject.SetActive(false);
+                playerBases[currentBase].currentLauncher--;
             }
         }
     }

@@ -2,7 +2,4 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMissileLauncher : MonoBehaviour
-{
-
-}
+public class PlayerMissileLauncher : MonoBehaviour{}
