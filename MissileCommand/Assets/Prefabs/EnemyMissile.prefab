@@ -45,9 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4543f422bbbb7b41a628a928c54a010, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  Speed: 1
   projetileLineRenderer: {fileID: 7623444962487877379}
-  targetMarker: {fileID: 0}
 --- !u!120 &7623444962487877379
 LineRenderer:
   m_ObjectHideFlags: 0

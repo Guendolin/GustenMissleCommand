@@ -5,13 +5,24 @@ using UnityEngineInternal;
 
 public class PlayerManager : MonoBehaviour
 {
+    public static PlayerManager Instance { get; private set; }
 
     [SerializeField]
     private Camera camera;
 
     public PlayerBase[] playerBases;
 
-    //Score keeping?
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -46,7 +57,7 @@ public class PlayerManager : MonoBehaviour
                     closetDistance = distanceToPosition;
                 }
             }
-            if (currentBase >=0 && playerBases[currentBase].HasMissiles())
+            if (currentBase >= 0 && playerBases[currentBase].HasMissiles())
             {
                 FireMissile(mousePositionWorld, playerBases[currentBase].playerMissileLauncher[playerBases[currentBase].currentLauncher].transform.position);
                 playerBases[currentBase].playerMissileLauncher[playerBases[currentBase].currentLauncher].gameObject.SetActive(false);

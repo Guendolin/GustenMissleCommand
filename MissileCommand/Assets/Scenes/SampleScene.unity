@@ -179,7 +179,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 60376449}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.82, y: -3.01, z: 0}
+  m_LocalPosition: {x: -4.64, y: -3.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 85893468}
@@ -1356,7 +1356,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 333097564}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.96, y: -3.02, z: 0}
+  m_LocalPosition: {x: -5.7799997, y: -3.02, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2091701633}
@@ -1896,7 +1896,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511258741}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.2, y: -3.2, z: 0.9355469}
+  m_LocalPosition: {x: -0.68999994, y: -3.2, z: 0.9355469}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 889568561}
@@ -1937,8 +1937,6 @@ MonoBehaviour:
   - {fileID: 959374012}
   - {fileID: 566188215}
   currentLauncher: 0
-  FireLimitXMin: 0
-  FireLimitXMax: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -3227,7 +3225,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 785900981}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.28, y: -3, z: 0}
+  m_LocalPosition: {x: 3.1800003, y: -3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1649256112}
@@ -3352,7 +3350,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 824039149}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.0999999, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 290647242}
@@ -3920,8 +3918,6 @@ MonoBehaviour:
   - {fileID: 1800135656}
   - {fileID: 1000894961}
   currentLauncher: 0
-  FireLimitXMin: 0
-  FireLimitXMax: 0
 --- !u!4 &978208700
 Transform:
   m_ObjectHideFlags: 0
@@ -3930,7 +3926,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 978208698}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.19, y: -3.2, z: 0.9355469}
+  m_LocalPosition: {x: 7.0899997, y: -3.2, z: 0.9355469}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1750452481}
@@ -4673,13 +4669,25 @@ MonoBehaviour:
   cityLayerBack: {fileID: 1292415246}
   cityLayerMid: {fileID: 755637883}
   cityLayerFront: {fileID: 1672113305}
-  targetCities:
+  playerCities:
   - {fileID: 333097564}
   - {fileID: 60376449}
   - {fileID: 1757975669}
   - {fileID: 1777734636}
   - {fileID: 785900981}
   - {fileID: 1606351455}
+  Enemytargets:
+  - {fileID: 333097564}
+  - {fileID: 60376449}
+  - {fileID: 1757975669}
+  - {fileID: 1777734636}
+  - {fileID: 785900981}
+  - {fileID: 1606351455}
+  - {fileID: 1850034039}
+  - {fileID: 511258741}
+  - {fileID: 978208698}
+  GameLevel: 1
+  levelMultiplier: 1
 --- !u!4 &1262503361
 Transform:
   m_ObjectHideFlags: 0
@@ -4994,8 +5002,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyMissileLauncher: {fileID: 1578677534}
   missileTarget: {fileID: 0}
+  MissileSpeed: 3
   enemyMissileSpawnY: 6
   fireTime: 2
+  MissileCount: 10
 --- !u!4 &1435096561
 Transform:
   m_ObjectHideFlags: 0
@@ -6042,7 +6052,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1606351455}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.53, y: -2.97, z: 0}
+  m_LocalPosition: {x: 4.4300003, y: -2.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1514195934}
@@ -6716,7 +6726,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1757975669}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.43, y: -3.21, z: 0}
+  m_LocalPosition: {x: -3.2499998, y: -3.21, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1511330437}
@@ -6829,7 +6839,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1777734636}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.03, y: -3.09, z: 0}
+  m_LocalPosition: {x: 1.9300001, y: -3.09, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 615041749}
@@ -7463,7 +7473,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850034039}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.35, y: -3.2, z: 0.9355469}
+  m_LocalPosition: {x: -7.1699996, y: -3.2, z: 0.9355469}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 843809904}
@@ -7504,8 +7514,6 @@ MonoBehaviour:
   - {fileID: 1333504536}
   - {fileID: 1814913847}
   currentLauncher: 0
-  FireLimitXMin: 0
-  FireLimitXMax: 0
 --- !u!1001 &1856630790
 PrefabInstance:
   m_ObjectHideFlags: 0

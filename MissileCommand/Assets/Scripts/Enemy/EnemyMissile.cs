@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyMissile : MonoBehaviour
 {
-    [SerializeField]
-    private float speed = 5f;
+    
+    public float Speed = 5f;
 
     private GameObject origin;
 
@@ -22,7 +22,8 @@ public class EnemyMissile : MonoBehaviour
     {
         if (isBeingFired)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, speed * Time.deltaTime);
+            Speed = EnemyManager.Instance.MissileSpeed;
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Speed * Time.deltaTime);
             projetileLineRenderer.positionCount = 2;
             projetileLineRenderer.SetPosition(0, originPosition);
             projetileLineRenderer.SetPosition(1, transform.position);

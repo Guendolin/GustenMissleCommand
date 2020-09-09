@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+    public static EnemyManager Instance { get; private set; }
+
     public EnemyMissileLauncher enemyMissileLauncher;
 
     public GameObject missileTarget;
+
+    public float MissileSpeed = 3f;
+
 
     [SerializeField]
     [Tooltip("Set the Y-position of the EnemyMissileLaunchers")]
@@ -27,8 +32,21 @@ public class EnemyManager : MonoBehaviour
 
     private float fireTimer = 0f;
 
+    public int MissileCount = 10;
+
     //some logic for if the missiles should be splitting
 
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
@@ -38,19 +56,20 @@ public class EnemyManager : MonoBehaviour
     void Update()
     {
         fireTimer += Time.deltaTime;
-        if (fireTimer >= fireTime)
+        if (fireTimer >= fireTime && MissileCount > 1)
         {
             fireTimer = 0;
             SetMissileTarget();
             enemyMissileLauncher.FireMissile(missileTarget, enemyMissileLauncher.gameObject);
             SetMissileLauncherPosition();
+            MissileCount--;
         }
     }
 
     void SetMissileTarget()
     {
-        int targetBase = Random.Range(0, 5);
-        missileTarget = GameManager.Instance.targetCities[targetBase];
+        int targetBase = Random.Range(0, 8);
+        missileTarget = GameManager.Instance.Enemytargets[targetBase];
     }
 
     void SetMissileLauncherPosition()
