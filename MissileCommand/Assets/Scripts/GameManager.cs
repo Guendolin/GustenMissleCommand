@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,18 +23,25 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject cityLayerFront;
 
-
-    //Ask Simon about these arrays, they are separate in some functions and share other functions, should this be rearranged?
+    //rework this with specific classes instead of game objects, could be empty classes
     public GameObject[] playerCities;
 
     private PlayerBase[] playerBases;
 
     public GameObject[] Enemytargets = new GameObject[8];
 
+    public bool isWaveActive = false;
+
     public int GameLevel = 1;
 
     public int levelMultiplier = 1;
 
+    public int TotalScore = 0;
+    public Text ScoreText;
+    public Text LevelText;
+    public Button StartButton;
+    public Button CreditsButton;
+    public Button QuitButton;
 
     private void Awake()
     {
@@ -45,44 +54,50 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
     void Start()
     {
+        ScoreText.text = "SCORE: " + TotalScore;
+        LevelText.text = "LEVEL: " + GameLevel;
+
         playerBases = PlayerManager.Instance.playerBases;
     }
 
     void Update()
     {
-        //Ask Simon, use this as is or switch it around so that the game manager keeps the list and the explosion manager accesses it?
-
-        //Win scenario
-        if (EnemyManager.Instance.MissileCount == 1 && ExplosionManager.Instance.enemyMissiles.Count == 0)
-        {
-            //Display a level win text
-            Debug.Log("Level Won");
-
-            //Up the levelmultiplier
-            levelMultiplier = (1 + (GameLevel / 10));
-
-            //Score counting
-            Debug.Log("Score: " + CountScore());
-
-            //Reset the player missiles for non destroyed bases
-            for (int i = 0; i < playerBases.Length; i++)
-            {
-                playerBases[i].ResetMissileLaunchers();
-            }
-
-            //Set a new amount of enemy missiles and increase speed slightly
-            EnemyManager.Instance.MissileCount = 10 * levelMultiplier;
-            EnemyManager.Instance.MissileSpeed = EnemyManager.Instance.MissileSpeed * levelMultiplier;
-
-        }
+        //TODO (rework with events) check when towns explode
         if (isTheGameLost())
         {
             Debug.Log("Game Over! :(");
+            EnableMenu();
+        }
+    }
+
+    public void GameStart()
+    {
+        DisableMenu();
+        isWaveActive = true;
+    }
+
+    public void LevelWon()
+    {
+        isWaveActive = false;
+        Debug.Log("Level Won");
+
+        levelMultiplier = (1 + (GameLevel / 10));
+        GameLevel++;
+        LevelText.text = "LEVEL: " + GameLevel;
+
+        TotalScore += CountScore();
+        ScoreText.text = "SCORE: " + TotalScore;
+
+        for (int i = 0; i < playerBases.Length; i++)
+        {
+            playerBases[i].ResetMissileLaunchers();
         }
 
+        EnemyManager.Instance.MissileCount = 10 * levelMultiplier;
+        EnemyManager.Instance.MissileSpeed = EnemyManager.Instance.MissileSpeed * levelMultiplier;
+        EnableMenu();
     }
 
     bool isTheGameLost()
@@ -98,6 +113,7 @@ public class GameManager : MonoBehaviour
         }
         if (safeCities < 1)
         {
+            isWaveActive = false;
             return true;
         }
         return false;
@@ -116,7 +132,7 @@ public class GameManager : MonoBehaviour
         {
             baseCount++;
         }
-
+       
         for (int i = 0; i < playerBases.Length; i++)
         {
             for (int j = 0; j < playerBases[i].playerMissileLauncher.Length; j++)
@@ -129,5 +145,29 @@ public class GameManager : MonoBehaviour
         }
 
         return (baseCount * baseScore + missileCount * missileScore) * levelMultiplier;
+    }
+
+    public void EnableMenu()
+    {
+        StartButton.gameObject.SetActive(true);
+        CreditsButton.gameObject.SetActive(true);
+        QuitButton.gameObject.SetActive(true);
+    }
+    public void DisableMenu()
+    {
+        StartButton.gameObject.SetActive(false);
+        CreditsButton.gameObject.SetActive(false);
+        QuitButton.gameObject.SetActive(false);
+    }
+
+    public void Quit()
+    {
+        Debug.Log("Quit");
+
+//#if UNITY_EDITOR
+//        EditorApplication.Exit(0);
+//#else
+//        Application.Quit();
+//#endif
     }
 }

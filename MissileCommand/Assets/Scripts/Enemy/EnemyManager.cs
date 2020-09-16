@@ -34,6 +34,7 @@ public class EnemyManager : MonoBehaviour
 
     public int MissileCount = 10;
 
+    
     //some logic for if the missiles should be splitting
 
     private void Awake()
@@ -55,14 +56,28 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
-        fireTimer += Time.deltaTime;
-        if (fireTimer >= fireTime && MissileCount > 1)
+        if (GameManager.Instance.isWaveActive)
         {
-            fireTimer = 0;
-            SetMissileTarget();
-            enemyMissileLauncher.FireMissile(missileTarget, enemyMissileLauncher.gameObject);
-            SetMissileLauncherPosition();
-            MissileCount--;
+            fireTimer += Time.deltaTime;
+            if (MissileCount > 1)
+            {
+                if (fireTimer >= fireTime)
+                {
+                    fireTimer = 0;
+                    SetMissileTarget();
+                    enemyMissileLauncher.FireMissile(missileTarget, enemyMissileLauncher.gameObject);
+                    SetMissileLauncherPosition();
+                    MissileCount--;
+                }
+            }
+            else
+            {
+                if (ExplosionManager.Instance.enemyMissiles.Count == 0)
+                {
+                    GameManager.Instance.LevelWon();
+                } 
+            }
+            
         }
     }
 

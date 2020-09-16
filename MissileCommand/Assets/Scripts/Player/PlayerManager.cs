@@ -24,11 +24,6 @@ public class PlayerManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-
-    }
-
     void Update()
     {
         OnMouseDown();
@@ -36,32 +31,35 @@ public class PlayerManager : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (GameManager.Instance.isWaveActive)
         {
-            Vector3 mousePositionScreen = Input.mousePosition;
-            Vector3 mousePositionWorld = camera.ScreenToWorldPoint(mousePositionScreen);
-
-            int currentBase = -1;
-
-            float closetDistance = float.MaxValue;
-
-            for (int i = 0; i < playerBases.Length; i++)
+            if (Input.GetMouseButtonDown(0))
             {
-                //break this out as a global variable
-                PlayerBase pBase = playerBases[i];
-                float distanceToPosition = Mathf.Abs(pBase.transform.position.x - mousePositionWorld.x);
+                Vector3 mousePositionScreen = Input.mousePosition;
+                Vector3 mousePositionWorld = camera.ScreenToWorldPoint(mousePositionScreen);
 
-                if (pBase.HasMissiles() && distanceToPosition < closetDistance)
+                int currentBase = -1;
+
+                float closetDistance = float.MaxValue;
+
+                for (int i = 0; i < playerBases.Length; i++)
                 {
-                    currentBase = i;
-                    closetDistance = distanceToPosition;
+                    //break this out as a global variable
+                    PlayerBase pBase = playerBases[i];
+                    float distanceToPosition = Mathf.Abs(pBase.transform.position.x - mousePositionWorld.x);
+
+                    if (pBase.HasMissiles() && distanceToPosition < closetDistance)
+                    {
+                        currentBase = i;
+                        closetDistance = distanceToPosition;
+                    }
                 }
-            }
-            if (currentBase >= 0 && playerBases[currentBase].HasMissiles())
-            {
-                FireMissile(mousePositionWorld, playerBases[currentBase].playerMissileLauncher[playerBases[currentBase].currentLauncher].transform.position);
-                playerBases[currentBase].playerMissileLauncher[playerBases[currentBase].currentLauncher].gameObject.SetActive(false);
-                playerBases[currentBase].currentLauncher--;
+                if (currentBase >= 0 && playerBases[currentBase].HasMissiles())
+                {
+                    FireMissile(mousePositionWorld, playerBases[currentBase].playerMissileLauncher[playerBases[currentBase].currentLauncher].transform.position);
+                    playerBases[currentBase].playerMissileLauncher[playerBases[currentBase].currentLauncher].gameObject.SetActive(false);
+                    playerBases[currentBase].currentLauncher--;
+                }
             }
         }
     }
