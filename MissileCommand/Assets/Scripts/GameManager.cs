@@ -3,14 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
+//using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-
-    //Store the 34 Base tiles       -For base pos and game juice
-    //Store the 3 city backgrounds  -For game juice, like shaking when city destroyed
 
     public GameObject[] BaseTiles = new GameObject[34];
 
@@ -31,17 +28,10 @@ public class GameManager : MonoBehaviour
     public GameObject[] Enemytargets = new GameObject[8];
 
     public bool isWaveActive = false;
-
     public int GameLevel = 1;
-
-    public int levelMultiplier = 1;
-
+    public int LevelMultiplier = 1;
     public int TotalScore = 0;
-    public Text ScoreText;
-    public Text LevelText;
-    public Button StartButton;
-    public Button CreditsButton;
-    public Button QuitButton;
+
 
     private void Awake()
     {
@@ -56,51 +46,54 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        ScoreText.text = "SCORE: " + TotalScore;
-        LevelText.text = "LEVEL: " + GameLevel;
-
         playerBases = PlayerManager.Instance.playerBases;
     }
 
-    void Update()
-    {
-        //TODO (rework with events) check when towns explode
-        if (isTheGameLost())
-        {
-            Debug.Log("Game Over! :(");
-            EnableMenu();
-        }
-    }
 
     public void GameStart()
     {
-        DisableMenu();
+        if (UIManager.Instance)
+        {
+            UIManager.Instance.DisableMenu();
+        }
         isWaveActive = true;
     }
 
     public void LevelWon()
     {
         isWaveActive = false;
-        Debug.Log("Level Won");
+        if (UIManager.Instance)
+        {
+            UIManager.Instance.LevelWonText.gameObject.SetActive(true);
+        }
 
-        levelMultiplier = (1 + (GameLevel / 10));
+        LevelMultiplier = (1 + (GameLevel / 10));
         GameLevel++;
-        LevelText.text = "LEVEL: " + GameLevel;
+        if (UIManager.Instance)
+        {
+            UIManager.Instance.LevelText.text = " " + GameLevel;
+        }
 
         TotalScore += CountScore();
-        ScoreText.text = "SCORE: " + TotalScore;
+        if (UIManager.Instance)
+        {
+            UIManager.Instance.ScoreText.text = " " + TotalScore;
+        }
 
         for (int i = 0; i < playerBases.Length; i++)
         {
             playerBases[i].ResetMissileLaunchers();
         }
 
-        EnemyManager.Instance.MissileCount = 10 * levelMultiplier;
-        EnemyManager.Instance.MissileSpeed = EnemyManager.Instance.MissileSpeed * levelMultiplier;
-        EnableMenu();
+        EnemyManager.Instance.MissileCount = 10 * LevelMultiplier;
+        EnemyManager.Instance.MissileSpeed = EnemyManager.Instance.MissileSpeed * LevelMultiplier;
+        if (UIManager.Instance)
+        {
+            UIManager.Instance.EnableMenu();
+        }
     }
 
-    bool isTheGameLost()
+    public bool isTheGameLost()
     {
         int safeCities = playerCities.Length;
 
@@ -132,7 +125,7 @@ public class GameManager : MonoBehaviour
         {
             baseCount++;
         }
-       
+
         for (int i = 0; i < playerBases.Length; i++)
         {
             for (int j = 0; j < playerBases[i].playerMissileLauncher.Length; j++)
@@ -144,30 +137,49 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        return (baseCount * baseScore + missileCount * missileScore) * levelMultiplier;
+        return (baseCount * baseScore + missileCount * missileScore) * LevelMultiplier;
     }
 
-    public void EnableMenu()
+    public void ResetGame()
     {
-        StartButton.gameObject.SetActive(true);
-        CreditsButton.gameObject.SetActive(true);
-        QuitButton.gameObject.SetActive(true);
-    }
-    public void DisableMenu()
-    {
-        StartButton.gameObject.SetActive(false);
-        CreditsButton.gameObject.SetActive(false);
-        QuitButton.gameObject.SetActive(false);
-    }
+        GameLevel = 1;
+        LevelMultiplier = 1;
+        TotalScore = 0;
+        isWaveActive = false;
 
+        LevelMultiplier = (1 + (GameLevel / 10));
+        
+        if (UIManager.Instance)
+        {
+            UIManager.Instance.LevelText.text = " " + GameLevel;
+        }
+
+        if (UIManager.Instance)
+        {
+            UIManager.Instance.ScoreText.text = " " + TotalScore;
+        }
+
+        for (int i = 0; i < playerBases.Length; i++)
+        {
+            playerBases[i].ResetMissileLaunchers();
+        }
+
+        EnemyManager.Instance.MissileCount = 10 * LevelMultiplier;
+        EnemyManager.Instance.MissileSpeed = EnemyManager.Instance.MissileSpeed * LevelMultiplier;
+        
+        if (UIManager.Instance)
+        {
+            UIManager.Instance.EnableMenu();
+        }
+    }
     public void Quit()
     {
         Debug.Log("Quit");
 
-//#if UNITY_EDITOR
-//        EditorApplication.Exit(0);
-//#else
-//        Application.Quit();
-//#endif
+        //#if UNITY_EDITOR
+        //        EditorApplication.Exit(0);
+        //#else
+        //        Application.Quit();
+        //#endif
     }
 }

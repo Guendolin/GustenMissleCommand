@@ -74,6 +74,7 @@ public class EnemyManager : MonoBehaviour
             {
                 if (ExplosionManager.Instance.enemyMissiles.Count == 0)
                 {
+                    Debug.Log("Level Won");
                     GameManager.Instance.LevelWon();
                 } 
             }
