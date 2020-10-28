@@ -8,7 +8,6 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    //public int TotalScore = 0;
     public Text ScoreText;
     public Text LevelText;
     public Text LevelWonText;
@@ -16,6 +15,9 @@ public class UIManager : MonoBehaviour
     public Button StartButton;
     public Button RestartButton;
     public Button QuitButton;
+
+    //Remove functionality from game manager and make UImanager fetch data instead
+    //Remove singletons from other scripts and a reference in game manager
 
     private void Awake()
     {
@@ -32,6 +34,8 @@ public class UIManager : MonoBehaviour
     {
         ScoreText.text = " " + GameManager.Instance.TotalScore;
         LevelText.text = " " + GameManager.Instance.GameLevel;
+        GameEvents.Instance.onGameStartEvent += UIGameStart;
+
     }
 
     void Update()
@@ -56,5 +60,18 @@ public class UIManager : MonoBehaviour
         QuitButton.gameObject.SetActive(false);
         LevelWonText.gameObject.SetActive(false);
         GameOverText.gameObject.SetActive(false);
+    }
+
+    private void UIGameStart()
+    {
+        DisableMenu();
+    }
+
+    private void OnDestroy()
+    {
+        if (GameEvents.Instance != null)
+        {
+            GameEvents.Instance.onGameStartEvent -= UIGameStart;
+        }
     }
 }

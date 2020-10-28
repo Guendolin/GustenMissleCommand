@@ -49,13 +49,9 @@ public class GameManager : MonoBehaviour
         playerBases = PlayerManager.Instance.playerBases;
     }
 
-
     public void GameStart()
     {
-        if (UIManager.Instance)
-        {
-            UIManager.Instance.DisableMenu();
-        }
+        GameEvents.Instance.GameStartEvent();
         isWaveActive = true;
     }
 
@@ -174,12 +170,12 @@ public class GameManager : MonoBehaviour
     }
     public void Quit()
     {
-        Debug.Log("Quit");
+//        Debug.Log("Quit");
 
-        //#if UNITY_EDITOR
-        //        EditorApplication.Exit(0);
-        //#else
-        //        Application.Quit();
-        //#endif
+//#if UNITY_EDITOR
+//        EditorApplication.Exit(0);
+//#else
+//                Application.Quit();
+//#endif
     }
 }
