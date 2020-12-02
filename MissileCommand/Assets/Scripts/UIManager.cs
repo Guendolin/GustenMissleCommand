@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager Instance { get; private set; }
-
     public Text ScoreText;
     public Text LevelText;
     public Text LevelWonText;
@@ -16,26 +14,13 @@ public class UIManager : MonoBehaviour
     public Button RestartButton;
     public Button QuitButton;
 
-    //Remove functionality from game manager and make UImanager fetch data instead
-    //Remove singletons from other scripts and a reference in game manager
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
     void Start()
     {
         ScoreText.text = " " + GameManager.Instance.TotalScore;
         LevelText.text = " " + GameManager.Instance.GameLevel;
         GameEvents.Instance.onGameStartEvent += UIGameStart;
-
+        GameEvents.Instance.onLevelWonEvent += UILevelWon;
+        GameEvents.Instance.onGameResetEvent += UIGameReset;
     }
 
     void Update()
@@ -67,11 +52,28 @@ public class UIManager : MonoBehaviour
         DisableMenu();
     }
 
+    private void UILevelWon()
+    {
+        LevelWonText.gameObject.SetActive(true);
+        LevelText.text = " " + GameManager.Instance.GameLevel;
+        ScoreText.text = " " + GameManager.Instance.TotalScore;
+        EnableMenu();
+    }
+
+    private void UIGameReset()
+    {
+        LevelText.text = " " + GameManager.Instance.GameLevel;
+        ScoreText.text = " " + GameManager.Instance.TotalScore;
+        EnableMenu();
+    }
+
     private void OnDestroy()
     {
         if (GameEvents.Instance != null)
         {
             GameEvents.Instance.onGameStartEvent -= UIGameStart;
+            GameEvents.Instance.onLevelWonEvent -= UILevelWon;
+            GameEvents.Instance.onGameResetEvent -= UIGameReset;
         }
     }
 }

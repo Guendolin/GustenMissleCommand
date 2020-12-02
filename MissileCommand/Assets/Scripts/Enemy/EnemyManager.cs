@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    public static EnemyManager Instance { get; private set; }
-
     public EnemyMissileLauncher enemyMissileLauncher;
 
     public GameObject missileTarget;
@@ -37,18 +35,6 @@ public class EnemyManager : MonoBehaviour
     
     //some logic for if the missiles should be splitting
 
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
     void Start()
     {
         SetMissileLauncherPosition();
@@ -72,13 +58,12 @@ public class EnemyManager : MonoBehaviour
             }
             else
             {
-                if (ExplosionManager.Instance.enemyMissiles.Count == 0)
+                if ( GameManager.Instance.explosionManager.enemyMissiles.Count == 0)
                 {
                     Debug.Log("Level Won");
                     GameManager.Instance.LevelWon();
                 } 
             }
-            
         }
     }
 

@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-//using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
+
+    public EnemyManager enemyManager;
+    public PlayerManager playerManager;
+    public ExplosionManager explosionManager;
 
     public GameObject[] BaseTiles = new GameObject[34];
 
@@ -20,11 +22,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject cityLayerFront;
 
-    //rework this with specific classes instead of game objects, could be empty classes
-    public GameObject[] playerCities;
+    public PlayerCitiy[] playerCities;
 
     private PlayerBase[] playerBases;
 
+    //rework this with specific a class instead of game object, could be empty class
     public GameObject[] Enemytargets = new GameObject[8];
 
     public bool isWaveActive = false;
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        playerBases = PlayerManager.Instance.playerBases;
+        playerBases = playerManager.playerBases;
     }
 
     public void GameStart()
@@ -58,35 +60,17 @@ public class GameManager : MonoBehaviour
     public void LevelWon()
     {
         isWaveActive = false;
-        if (UIManager.Instance)
-        {
-            UIManager.Instance.LevelWonText.gameObject.SetActive(true);
-        }
-
         LevelMultiplier = (1 + (GameLevel / 10));
         GameLevel++;
-        if (UIManager.Instance)
-        {
-            UIManager.Instance.LevelText.text = " " + GameLevel;
-        }
-
         TotalScore += CountScore();
-        if (UIManager.Instance)
-        {
-            UIManager.Instance.ScoreText.text = " " + TotalScore;
-        }
 
         for (int i = 0; i < playerBases.Length; i++)
         {
             playerBases[i].ResetMissileLaunchers();
         }
-
-        EnemyManager.Instance.MissileCount = 10 * LevelMultiplier;
-        EnemyManager.Instance.MissileSpeed = EnemyManager.Instance.MissileSpeed * LevelMultiplier;
-        if (UIManager.Instance)
-        {
-            UIManager.Instance.EnableMenu();
-        }
+        GameEvents.Instance.LevelWonEvent();
+        Instance.enemyManager.MissileCount = 10 * LevelMultiplier;
+        Instance.enemyManager.MissileSpeed = Instance.enemyManager.MissileSpeed * LevelMultiplier;
     }
 
     public bool isTheGameLost()
@@ -112,10 +96,8 @@ public class GameManager : MonoBehaviour
     {
         int baseCount = 0;
         int missileCount = 0;
-
         int baseScore = 50;
         int missileScore = 5;
-
 
         for (int i = 0; i < Enemytargets.Length; i++)
         {
@@ -142,40 +124,32 @@ public class GameManager : MonoBehaviour
         LevelMultiplier = 1;
         TotalScore = 0;
         isWaveActive = false;
-
         LevelMultiplier = (1 + (GameLevel / 10));
-        
-        if (UIManager.Instance)
-        {
-            UIManager.Instance.LevelText.text = " " + GameLevel;
-        }
-
-        if (UIManager.Instance)
-        {
-            UIManager.Instance.ScoreText.text = " " + TotalScore;
-        }
 
         for (int i = 0; i < playerBases.Length; i++)
         {
             playerBases[i].ResetMissileLaunchers();
+            playerBases[i].ResetBase();
         }
 
-        EnemyManager.Instance.MissileCount = 10 * LevelMultiplier;
-        EnemyManager.Instance.MissileSpeed = EnemyManager.Instance.MissileSpeed * LevelMultiplier;
-        
-        if (UIManager.Instance)
+        for (int i = 0; i < playerCities.Length; i++)
         {
-            UIManager.Instance.EnableMenu();
+            playerCities[i].ResetCitiy();
         }
+
+        GameEvents.Instance.GameResetEvent();
+
+        Instance.enemyManager.MissileCount = 10 * LevelMultiplier;
+        Instance.enemyManager.MissileSpeed = Instance.enemyManager.MissileSpeed * LevelMultiplier;
     }
     public void Quit()
     {
-//        Debug.Log("Quit");
+        //        Debug.Log("Quit");
 
-//#if UNITY_EDITOR
-//        EditorApplication.Exit(0);
-//#else
-//                Application.Quit();
-//#endif
+        //#if UNITY_EDITOR
+        //        EditorApplication.Exit(0);
+        //#else
+        //                Application.Quit();
+        //#endif
     }
 }

@@ -6284,6 +6284,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5df9e49893550e441989f298dc39596b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyManager: {fileID: 1435096560}
+  playerManager: {fileID: 394363388}
+  explosionManager: {fileID: 1911503381}
   BaseTiles:
   - {fileID: 290647241}
   - {fileID: 1559852019}

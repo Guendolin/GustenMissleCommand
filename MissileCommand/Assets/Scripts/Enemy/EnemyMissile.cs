@@ -22,7 +22,8 @@ public class EnemyMissile : MonoBehaviour
     {
         if (isBeingFired)
         {
-            Speed = EnemyManager.Instance.MissileSpeed;
+            //Speed = EnemyManager.Instance.MissileSpeed;
+            Speed =  GameManager.Instance.enemyManager.MissileSpeed;
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Speed * Time.deltaTime);
             projetileLineRenderer.positionCount = 2;
             projetileLineRenderer.SetPosition(0, originPosition);

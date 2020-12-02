@@ -4,22 +4,7 @@ using UnityEngine;
 
 public class ExplosionManager : MonoBehaviour
 {
-    public static ExplosionManager Instance { get; private set; }
-
     public List<EnemyMissile> enemyMissiles;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
 
     public bool CheckCollision(GameObject self, GameObject other, float bufferRange)
     {

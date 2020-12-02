@@ -19,13 +19,10 @@ public class GameEvents : MonoBehaviour
             Destroy(gameObject);
         }
     }
-    ////public delegate int OnGameStartEventHandler(int x);
-    ////public OnGameStartEventHandler Test = (x) => { return 0; };
-
-
-    ////public Func<int,int> Test2 = (x) => { return 0; };
 
     public event Action onGameStartEvent;
+    public event Action onLevelWonEvent;
+    public event Action onGameResetEvent;
     public void GameStartEvent()
     {
         if (onGameStartEvent != null)
@@ -33,4 +30,19 @@ public class GameEvents : MonoBehaviour
             onGameStartEvent();
         }
     }
+    public void LevelWonEvent()
+    {
+        if (onLevelWonEvent != null)
+        {
+            onLevelWonEvent();
+        }
+    }
+    public void GameResetEvent()
+    {
+        if (onGameResetEvent != null)
+        {
+            onGameResetEvent();
+        }
+    }
 }
+

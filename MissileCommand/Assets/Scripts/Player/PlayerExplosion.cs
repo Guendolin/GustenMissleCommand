@@ -20,7 +20,7 @@ public class PlayerExplosion : MonoBehaviour
     private void OnEnable()
     {
         ExplosionRadius = minExpolsionRadius;
-        ExplosionManager.Instance.CheckCollisionLoop(this);
+        GameManager.Instance.explosionManager.CheckCollisionLoop(this);
     }
 
     void Update()

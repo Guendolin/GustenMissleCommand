@@ -23,4 +23,12 @@ public class PlayerBase : MonoBehaviour
             playerMissileLauncher[i].gameObject.SetActive(true);
         }
     }
+
+    public void ResetBase()
+    {
+        if (!gameObject.activeInHierarchy)
+        {
+            gameObject.SetActive(true);
+        }
+    }
 }
