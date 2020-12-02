@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3534690444162898023}
   - component: {fileID: 3534690444162898022}
   m_Layer: 0
-  m_Name: PlayerMissileLauncher 1
+  m_Name: PlayerMissileLauncher
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf7434b3a75d24b48a915049a44452f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  missileSprite: {fileID: 3534690444618118417}
 --- !u!1 &3534690444618118417
 GameObject:
   m_ObjectHideFlags: 0

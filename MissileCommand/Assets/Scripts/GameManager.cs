@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject cityLayerFront;
 
-    public PlayerCitiy[] playerCities;
+    public PlayerCity[] playerCities;
 
     private PlayerBase[] playerBases;
 
@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < playerCities.Length; i++)
         {
-            playerCities[i].ResetCitiy();
+            playerCities[i].ResetCity();
         }
 
         GameEvents.Instance.GameResetEvent();
