@@ -448,6 +448,7 @@ GameObject:
   - component: {fileID: 131849853}
   - component: {fileID: 131849852}
   - component: {fileID: 131849851}
+  - component: {fileID: 131849854}
   m_Layer: 5
   m_Name: YesRestartButton
   m_TagString: Untagged
@@ -573,6 +574,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 29918193}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 716441370}
+        m_MethodName: MouseClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &131849852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -609,6 +632,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131849849}
   m_CullTransparentMesh: 0
+--- !u!114 &131849854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131849849}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 716441370}
+          m_MethodName: MouseOverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &142840238
 GameObject:
   m_ObjectHideFlags: 0
@@ -3440,6 +3491,7 @@ GameObject:
   - component: {fileID: 646363090}
   - component: {fileID: 646363089}
   - component: {fileID: 646363088}
+  - component: {fileID: 646363091}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -3554,6 +3606,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 29918193}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 716441370}
+        m_MethodName: MouseClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &646363089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3590,6 +3664,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 646363086}
   m_CullTransparentMesh: 0
+--- !u!114 &646363091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 646363086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 716441370}
+          m_MethodName: MouseOverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &702953419
 GameObject:
   m_ObjectHideFlags: 0
@@ -3987,12 +4089,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: 
-    clip: {fileID: 0}
-    volume: 0
-    pitch: 0
+  - name: MusicMenu
+    clip: {fileID: 8300000, guid: 5c4f774eba9f65b438c85e0e05bc557a, type: 3}
+    volume: 0.2
+    pitch: 1
+    loop: 1
+    panStereo: 0
+  - name: MusicGame0
+    clip: {fileID: 8300000, guid: 534ddd48b1be3804bb85c5b539e1ae20, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+    panStereo: 0
+  - name: MusicGame1
+    clip: {fileID: 8300000, guid: 7e58f218d1437a841863ca29602103f0, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+    panStereo: 0
+  - name: MusicGame2
+    clip: {fileID: 8300000, guid: 1843e1c65beea3d419f34dddc0fab3f1, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+    panStereo: 0
+  - name: MusicGame3
+    clip: {fileID: 8300000, guid: ad02c0fbe2e67484b8a041017a4efefa, type: 3}
+    volume: 0.3
+    pitch: 1
+    loop: 1
+    panStereo: 0
+  - name: Explosion0
+    clip: {fileID: 8300000, guid: 47d95c1f38e6eaa46a5d66ed58ae6840, type: 3}
+    volume: 0.6
+    pitch: 1
     loop: 0
-    source: {fileID: 0}
+    panStereo: 0
+  - name: Explosion1
+    clip: {fileID: 8300000, guid: 62b1c79bf48b6ae41874f81608229166, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 0
+    panStereo: 0
+  - name: Incoming
+    clip: {fileID: 8300000, guid: 9497510de3505654a88255918ce76388, type: 3}
+    volume: 0.1
+    pitch: 1
+    loop: 0
+    panStereo: 0
+  - name: MouseOver
+    clip: {fileID: 8300000, guid: 59c5d809154ed714ea04e32d01fc81c6, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    panStereo: 0
+  - name: MouseClick
+    clip: {fileID: 8300000, guid: a168292fd5f03f54581157d3062c99ca, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    panStereo: 0
 --- !u!4 &742521882
 Transform:
   m_ObjectHideFlags: 0
@@ -4001,7 +4157,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 742521880}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.2158152, y: -1.11445, z: 124.455536}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4523,6 +4679,7 @@ GameObject:
   - component: {fileID: 818784137}
   - component: {fileID: 818784136}
   - component: {fileID: 818784135}
+  - component: {fileID: 818784138}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -4648,6 +4805,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 202521841}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 716441370}
+        m_MethodName: MouseClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &818784136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4684,6 +4863,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818784133}
   m_CullTransparentMesh: 0
+--- !u!114 &818784138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818784133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 716441370}
+          m_MethodName: MouseOverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &824039149
 GameObject:
   m_ObjectHideFlags: 0
@@ -5755,6 +5962,7 @@ GameObject:
   - component: {fileID: 1068486582}
   - component: {fileID: 1068486581}
   - component: {fileID: 1068486580}
+  - component: {fileID: 1068486583}
   m_Layer: 5
   m_Name: NoRestartButton
   m_TagString: Untagged
@@ -5869,6 +6077,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1068486578}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 716441370}
+        m_MethodName: MouseClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1068486581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5905,6 +6135,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1068486578}
   m_CullTransparentMesh: 0
+--- !u!114 &1068486583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1068486578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 716441370}
+          m_MethodName: MouseOverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1069883599
 GameObject:
   m_ObjectHideFlags: 0
@@ -6197,6 +6455,7 @@ GameObject:
   - component: {fileID: 1210360147}
   - component: {fileID: 1210360146}
   - component: {fileID: 1210360145}
+  - component: {fileID: 1210360148}
   m_Layer: 5
   m_Name: YesQuitButton
   m_TagString: Untagged
@@ -6289,6 +6548,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1262503360}
+        m_MethodName: Quit
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 716441370}
+        m_MethodName: MouseClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1210360146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6325,6 +6606,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210360143}
   m_CullTransparentMesh: 0
+--- !u!114 &1210360148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1210360143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 716441370}
+          m_MethodName: MouseOverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &1247676411 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3534690444162898023, guid: f0a5c317ad645b24f8c784dc062be6e5,
@@ -6376,6 +6685,7 @@ MonoBehaviour:
   enemyManager: {fileID: 1435096560}
   playerManager: {fileID: 394363388}
   explosionManager: {fileID: 1911503381}
+  audioManager: {fileID: 742521881}
   BaseTiles:
   - {fileID: 290647241}
   - {fileID: 1559852019}
@@ -6415,12 +6725,12 @@ MonoBehaviour:
   cityLayerMid: {fileID: 755637883}
   cityLayerFront: {fileID: 1672113305}
   playerCities:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 333097566}
+  - {fileID: 60376451}
+  - {fileID: 1757975671}
+  - {fileID: 1777734638}
+  - {fileID: 785900983}
+  - {fileID: 1606351457}
   Enemytargets:
   - {fileID: 333097564}
   - {fileID: 60376449}
@@ -7404,6 +7714,7 @@ GameObject:
   - component: {fileID: 1512635517}
   - component: {fileID: 1512635516}
   - component: {fileID: 1512635515}
+  - component: {fileID: 1512635518}
   m_Layer: 5
   m_Name: NoQuitButton
   m_TagString: Untagged
@@ -7518,6 +7829,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1512635513}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 716441370}
+        m_MethodName: MouseClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1512635516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7554,6 +7887,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1512635513}
   m_CullTransparentMesh: 0
+--- !u!114 &1512635518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1512635513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 716441370}
+          m_MethodName: MouseOverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1514195933
 GameObject:
   m_ObjectHideFlags: 0
@@ -11015,6 +11376,7 @@ GameObject:
   - component: {fileID: 2092790045}
   - component: {fileID: 2092790044}
   - component: {fileID: 2092790043}
+  - component: {fileID: 2092790046}
   m_Layer: 5
   m_Name: StartButton
   m_TagString: Untagged
@@ -11107,6 +11469,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 716441370}
+        m_MethodName: DisableMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 716441370}
+        m_MethodName: MouseClickSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2092790044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11143,6 +11527,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2092790041}
   m_CullTransparentMesh: 0
+--- !u!114 &2092790046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092790041}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 716441370}
+          m_MethodName: MouseOverSound
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &2096621471 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3534690444162898023, guid: f0a5c317ad645b24f8c784dc062be6e5,

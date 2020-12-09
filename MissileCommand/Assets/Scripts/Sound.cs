@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine;
+using System;
 
 [System.Serializable]
 public class Sound
@@ -18,7 +19,10 @@ public class Sound
 
     public bool loop;
 
-    [HideInInspector]
+    [Range(-1f, 1f)]
+    public float panStereo;
+
+    [NonSerialized]
     public AudioSource source;
 
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class UIManager : MonoBehaviour
 {
     public Text ScoreText;
@@ -21,6 +20,7 @@ public class UIManager : MonoBehaviour
         GameEvents.Instance.onGameStartEvent += UIGameStart;
         GameEvents.Instance.onLevelWonEvent += UILevelWon;
         GameEvents.Instance.onGameResetEvent += UIGameReset;
+        GameManager.Instance.audioManager.Play("MusicMenu");
     }
 
     void Update()
@@ -50,6 +50,7 @@ public class UIManager : MonoBehaviour
     private void UIGameStart()
     {
         DisableMenu();
+        GameManager.Instance.audioManager.Stop("MusicMenu");
     }
 
     private void UILevelWon()
@@ -57,6 +58,8 @@ public class UIManager : MonoBehaviour
         LevelWonText.gameObject.SetActive(true);
         LevelText.text = " " + GameManager.Instance.GameLevel;
         ScoreText.text = " " + GameManager.Instance.TotalScore;
+        GameManager.Instance.StopCurrentSong();
+        GameManager.Instance.audioManager.Play("MusicMenu");
         EnableMenu();
     }
 
@@ -65,6 +68,15 @@ public class UIManager : MonoBehaviour
         LevelText.text = " " + GameManager.Instance.GameLevel;
         ScoreText.text = " " + GameManager.Instance.TotalScore;
         EnableMenu();
+    }
+
+    public void MouseOverSound() 
+    {
+        GameManager.Instance.audioManager.Play("MouseOver");
+    }
+    public void MouseClickSound() 
+    {
+        GameManager.Instance.audioManager.Play("MouseClick");
     }
 
     private void OnDestroy()

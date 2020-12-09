@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class PlayerCity : MonoBehaviour
 {
-
-
     public void ResetCity()
     {
         if (!gameObject.activeInHierarchy)

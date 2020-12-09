@@ -17,7 +17,11 @@ public class EnemyMissile : MonoBehaviour
     private LineRenderer projetileLineRenderer;
 
     private bool isBeingFired = false;
-
+    private void OnEnable()
+    {
+        GameManager.Instance.audioManager.PlayWithRandomPitch("Incoming", 0.6f, 1.4f);
+        //GameManager.Instance.audioManager.Play("Incoming");
+    }
     void Update()
     {
         if (isBeingFired)

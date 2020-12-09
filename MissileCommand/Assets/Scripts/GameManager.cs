@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public EnemyManager enemyManager;
     public PlayerManager playerManager;
     public ExplosionManager explosionManager;
+    public AudioManager audioManager;
 
     public GameObject[] BaseTiles = new GameObject[34];
 
@@ -34,6 +35,9 @@ public class GameManager : MonoBehaviour
     public int LevelMultiplier = 1;
     public int TotalScore = 0;
 
+    string fullTrackName = null;
+    int musicTrackNumber = -1;
+
 
     private void Awake()
     {
@@ -55,6 +59,7 @@ public class GameManager : MonoBehaviour
     {
         GameEvents.Instance.GameStartEvent();
         isWaveActive = true;
+        PlayNextSong();
     }
 
     public void LevelWon()
@@ -69,6 +74,7 @@ public class GameManager : MonoBehaviour
             playerBases[i].ResetMissileLaunchers();
         }
         GameEvents.Instance.LevelWonEvent();
+        StopCurrentSong();
         Instance.enemyManager.MissileCount = 10 * LevelMultiplier;
         Instance.enemyManager.MissileSpeed = Instance.enemyManager.MissileSpeed * LevelMultiplier;
     }
@@ -141,6 +147,29 @@ public class GameManager : MonoBehaviour
 
         Instance.enemyManager.MissileCount = 10 * LevelMultiplier;
         Instance.enemyManager.MissileSpeed = Instance.enemyManager.MissileSpeed * LevelMultiplier;
+    }
+
+    public void PlayNextSong()
+    {
+        StopCurrentSong();
+        if (musicTrackNumber <= 2)
+        {
+            musicTrackNumber++;
+        }
+        else
+        {
+            musicTrackNumber = 0;
+        }
+
+        fullTrackName = "MusicGame" + musicTrackNumber;
+        audioManager.Play(fullTrackName);
+    }
+    public void StopCurrentSong()
+    {
+        if (fullTrackName != null)
+        {
+            audioManager.Stop(fullTrackName);
+        }
     }
     public void Quit()
     {

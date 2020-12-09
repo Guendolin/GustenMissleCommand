@@ -19,6 +19,7 @@ public class PlayerExplosion : MonoBehaviour
 
     private void OnEnable()
     {
+        GameManager.Instance.audioManager.PlayWithRandomPitch("Explosion0", 0.8f, 1.2f);
         ExplosionRadius = minExpolsionRadius;
         GameManager.Instance.explosionManager.CheckCollisionLoop(this);
     }
@@ -31,7 +32,7 @@ public class PlayerExplosion : MonoBehaviour
         if (timer >= 1f)
         {
             timer = 0f;
-            ExplosionRadius = minExpolsionRadius;
+            ExplosionRadius = minExpolsionRadius; 
             PlayerExplosionPool.Instance.ReturnToPool(this);
         }
     }
