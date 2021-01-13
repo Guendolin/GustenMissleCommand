@@ -15,6 +15,14 @@ public class PlayerBase : MonoBehaviour
         ResetMissileLaunchers();
     }
 
+    public void LaunchSmoke(Vector2 launcherPosition)
+    {
+        var playerLaunchSmoke = PlayerLaunchSmokePool.Instance.Get();
+
+        playerLaunchSmoke.transform.position = launcherPosition;
+        playerLaunchSmoke.gameObject.SetActive(true);
+    }
+
     public void ResetMissileLaunchers()
     {
         currentLauncher = playerMissileLauncher.Length - 1;

@@ -25,6 +25,11 @@ public class PlayerMissile : MonoBehaviour
 
     public Vector3 ProjectilePosition => projectile.transform.position;
 
+    private void OnEnable()
+    {
+        GameManager.Instance.audioManager.Play("Missile");
+    }
+
     void Update()
     {
         if (isBeingFired)
@@ -36,6 +41,7 @@ public class PlayerMissile : MonoBehaviour
 
             if ((targetMarker.transform.position - projectile.transform.position).sqrMagnitude < 0.1f)
             {
+                GameManager.Instance.audioManager.Stop("Missile");
                 ExplodeAndReturnToPool();
             }
         }

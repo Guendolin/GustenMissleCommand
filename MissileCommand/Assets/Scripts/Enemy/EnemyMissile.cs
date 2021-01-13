@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class EnemyMissile : MonoBehaviour
 {
-    
-    public float Speed = 5f;
+    //this is speed is set in the EnemyManager
+    private float Speed = 1f;
 
     private GameObject origin;
 
@@ -17,16 +17,16 @@ public class EnemyMissile : MonoBehaviour
     private LineRenderer projetileLineRenderer;
 
     private bool isBeingFired = false;
+
     private void OnEnable()
     {
         GameManager.Instance.audioManager.PlayWithRandomPitch("Incoming", 0.6f, 1.4f);
-        //GameManager.Instance.audioManager.Play("Incoming");
     }
+
     void Update()
     {
         if (isBeingFired)
         {
-            //Speed = EnemyManager.Instance.MissileSpeed;
             Speed =  GameManager.Instance.enemyManager.MissileSpeed;
             transform.position = Vector3.MoveTowards(transform.position, target.transform.position, Speed * Time.deltaTime);
             projetileLineRenderer.positionCount = 2;
@@ -37,6 +37,10 @@ public class EnemyMissile : MonoBehaviour
             {
                 target.SetActive(false);
                 ExplodeAndReturnToPool();
+                if (GameManager.Instance.isTheGameLost())
+                {
+                    GameEvents.Instance.GameOverEvent();
+                }
             }
         }
     }

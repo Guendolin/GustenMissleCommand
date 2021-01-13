@@ -1,5 +1,4 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Audio;
 using UnityEngine;
@@ -23,6 +22,5 @@ public class Sound
     public float panStereo;
 
     [NonSerialized]
-    public AudioSource source;
-
+    public AudioSource source; 
 }

@@ -23,6 +23,7 @@ public class GameEvents : MonoBehaviour
     public event Action onGameStartEvent;
     public event Action onLevelWonEvent;
     public event Action onGameResetEvent;
+    public event Action onGameOverEvent;
     public void GameStartEvent()
     {
         if (onGameStartEvent != null)
@@ -42,6 +43,13 @@ public class GameEvents : MonoBehaviour
         if (onGameResetEvent != null)
         {
             onGameResetEvent();
+        }
+    }
+    public void GameOverEvent()
+    {
+        if (onGameOverEvent != null)
+        {
+            onGameOverEvent();
         }
     }
 }

@@ -8,7 +8,7 @@ public class EnemyManager : MonoBehaviour
 
     public GameObject missileTarget;
 
-    public float MissileSpeed = 3f;
+    public float MissileSpeed = 1f;
 
 
     [SerializeField]
@@ -31,9 +31,6 @@ public class EnemyManager : MonoBehaviour
     private float fireTimer = 0f;
 
     public int MissileCount = 10;
-
-    
-    //some logic for if the missiles should be splitting
 
     void Start()
     {
@@ -58,11 +55,11 @@ public class EnemyManager : MonoBehaviour
             }
             else
             {
-                if ( GameManager.Instance.explosionManager.enemyMissiles.Count == 0)
+                if (GameManager.Instance.explosionManager.enemyMissiles.Count == 0)
                 {
                     Debug.Log("Level Won");
                     GameManager.Instance.LevelWon();
-                } 
+                }
             }
         }
     }

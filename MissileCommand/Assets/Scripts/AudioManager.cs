@@ -1,14 +1,11 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine.Audio;
 using UnityEngine;
 
 
-//Add left/right
-//Add functionality for randomness in pitch, for explosions and so forth
-
 public class AudioManager : MonoBehaviour
 {
+    //Think about reworking this without the array and the strings
     public Sound[] sounds;
 
     private void Awake()
@@ -22,10 +19,6 @@ public class AudioManager : MonoBehaviour
             s.source.loop = s.loop;
             s.source.panStereo = s.panStereo;
         }
-    }
-    void Start()
-    {
-
     }
 
     public void Play(string name)

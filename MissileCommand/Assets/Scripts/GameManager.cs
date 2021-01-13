@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
         PlayNextSong();
     }
 
+    //think about renaming this
     public void LevelWon()
     {
         isWaveActive = false;
@@ -81,7 +82,7 @@ public class GameManager : MonoBehaviour
 
     public bool isTheGameLost()
     {
-        int safeCities = playerCities.Length;
+         int safeCities = playerCities.Length;
 
         for (int i = 0; i < playerCities.Length; i++)
         {
@@ -96,6 +97,7 @@ public class GameManager : MonoBehaviour
             return true;
         }
         return false;
+
     }
 
     int CountScore()
